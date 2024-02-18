@@ -16,7 +16,7 @@ let products = [
     {
         productId: 3,
         name: 'Strawberry',
-        image: './images/strawberry.jpg',
+        image: './images/strawberr.jpg',
         price: 150
     },
 ];
