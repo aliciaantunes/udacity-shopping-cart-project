@@ -1,0 +1,16 @@
+{
+  "name": "shopping-cart-project",
+  "version": "0.0.1",
+  "description": "Alicia´s final project shopping cart to Udacity",
+  "main": "index.js",
+  "author": "Alicia Antunes",
+  "license": "MIT",
+  "scripts": {
+    "start": "live-server --port=3000 src",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "live-server": "^1.2.2"
+  }
+}
