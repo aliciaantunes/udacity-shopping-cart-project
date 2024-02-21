@@ -1,25 +1,5 @@
 let currencySymbol = '$';
 
-let products = [
-    {
-        productId: 1,
-        name: 'Cherry',
-        image: './images/cherry.jpg',
-        price: 100
-    },
-    {
-        productId: 2,
-        name: 'Orange',
-        image: './images/orange.jpg',
-        price: 200
-    },
-    {
-        productId: 3,
-        name: 'Strawberry',
-        image: './images/strawberry.jpg',
-        price: 150
-    },
-];
 
 // Draws product list
 function drawProducts() {
