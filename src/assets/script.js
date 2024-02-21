@@ -80,6 +80,9 @@ function decreaseQuantity (productId) {
   let cartProduct = cart.find((item) => item.productId === productId);
   if (cartProduct) {
     cartProduct.quantity--;
+    if (cartProduct.quantity === 0) {
+      cart = cart.filter((item) => item.productId !== productId);
+    }
   }
 }
 
@@ -89,20 +92,38 @@ function decreaseQuantity (productId) {
   - removeProductFromCart should remove the product from the cart
 */
 function removeProductFromCart (productId) {
-  cart = cart.filter((item) => item.productId !== productId); 
+  let cartProduct = cart.find((item) => item.productId === productId);
+  if (cartProduct) {
+    cartProduct.quantity = 0;
+    cart = cart.filter((item) => item.productId !== productId); 
+  }
 }
+
 
 /* Create a function named cartTotal that has no parameters
   - cartTotal should iterate through the cart to get the total of all products
   - cartTotal should return the sum of the products in the cart
 */
+function cartTotal() {
+  let total = 0;
+
+  for (let item of cart) {
+    total += item.quantity * item.price;
+  }
+
+  return total;
+}
 
 /* Create a function called emptyCart that empties the products from the cart */
+function emptyCart () {
+  cart.splice(0, cart.length);
+}
 
 /* Create a function named pay that takes in an amount as an argument
   - pay will return a negative number if there is a remaining balance
   - pay will return a positive number if money should be returned to customer
 */
+
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
