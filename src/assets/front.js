@@ -103,6 +103,13 @@ document.querySelector('.cart').addEventListener('click', (e) => {
     }
 });
 
+// Event delegation used to support dynamically added cart items
+document.querySelector('.empty-btn').addEventListener('click', (e) => {
+    emptyCart();
+    drawCart();
+    drawCheckout();
+});
+
 document.querySelector('.pay').addEventListener('click', (e) => {
     e.preventDefault();
 

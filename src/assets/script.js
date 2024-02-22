@@ -99,6 +99,10 @@ function removeProductFromCart (productId) {
   }
 }
 
+/* Create a function called emptyCart that empties the products from the cart */
+function emptyCart() {
+  cart = []; 
+}
 
 /* Create a function named cartTotal that has no parameters
   - cartTotal should iterate through the cart to get the total of all products
@@ -113,12 +117,6 @@ function cartTotal() {
 
   return total;
 }
-
-/* Create a function called emptyCart that empties the products from the cart */
-document.addEventListener('DOMContentLoaded', function() {
-  const emptyCartButton = document.querySelector('.empty-btn .empty-cart');
-  emptyCartButton.addEventListener('click', emptyCart);
-});
 
 /* Create a function named pay that takes in an amount as an argument
   - pay will return a negative number if there is a remaining balance
