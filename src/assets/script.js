@@ -115,17 +115,86 @@ function cartTotal() {
 }
 
 /* Create a function called emptyCart that empties the products from the cart */
-function emptyCart () {
-  cart.splice(0, cart.length);
-}
+document.addEventListener('DOMContentLoaded', function() {
+  const emptyCartButton = document.querySelector('.empty-btn .empty-cart');
+  emptyCartButton.addEventListener('click', emptyCart);
+});
 
 /* Create a function named pay that takes in an amount as an argument
   - pay will return a negative number if there is a remaining balance
   - pay will return a positive number if money should be returned to customer
 */
+function pay (amount) {
+  let remainingBalance = amount - cartTotal();
+
+  if (remainingBalance >= 0) {
+    return remainingBalance;
+  } else {
+    return -remainingBalance;
+  }
+}
 
 
-/* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
+
+currencySelector.addEventListener('change', function () {
+  const selectedCurrency = currencySelector.value;
+
+  const conversionRates = {
+    usd: 1,
+    real: 5.5,
+    euro: 0.85,
+    yen: 110,
+  };
+
+  const priceElements = document.querySelectorAll(".price");
+  const totalElement = document.querySelector(".cart-total");
+
+  priceElements.forEach((element) => {
+    const price = parseFloat(element.textContent);
+    let convertedPrice;
+
+    if (selectedCurrency === 'usd') {
+      convertedPrice = price;
+    } else {
+      convertedPrice = price * conversionRates[selectedCurrency];
+    }
+
+    element.textContent = convertedPrice.toFixed(2);
+  });
+
+  const total = parseFloat(totalElement.textContent);
+  let convertedTotal;
+
+  if (selectedCurrency === 'usd') {
+    convertedTotal = total;
+  } else {
+    convertedTotal = total * conversionRates[selectedCurrency];
+  }
+
+  totalElement.textContent = convertedTotal.toFixed(2);
+
+
+  // Atualizar os valores de preço nos objetos products e cart
+  products = products.map((product) => {
+    let convertedPrice;
+
+    if (selectedCurrency === 'usd') {
+      convertedPrice = product.price;
+    } else {
+      convertedPrice = product.price * conversionRates[selectedCurrency];
+    }
+
+    return { ...product, price: convertedPrice };
+  });
+
+  cart.forEach((item) => {
+    if (selectedCurrency !== 'usd') {
+      item.price = item.price * conversionRates[selectedCurrency];
+    }
+  });
+});
+
+
 
 
 /* The following is for running unit tests. 
@@ -144,6 +213,5 @@ module.exports = {
     cartTotal,
     pay, 
     emptyCart,
-    /* Uncomment the following line if completing the currency converter bonus */
-    // currency
+    currency
   }
