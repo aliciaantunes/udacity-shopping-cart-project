@@ -1,44 +1,28 @@
-/* Create an array named products which you will use to add all of your product object literals that you create in the next step. */
-let products = [];
+// Products data initial list
+let products = [
+  {
+    name: "Cherry",
+    price: 20,
+    quantity: 0,
+    productId: 1,
+    image: "./images/cherry.jpg"
+  },
+  {
+    name: "Orange",
+    price: 10,
+    quantity: 0,
+    productId: 2,
+    image: "./images/orange.jpg"
+  },
+  {
+    name: "Strawberry",
+    price: 15,
+    quantity: 0,
+    productId: 3,
+    image: "./images/strawberry.jpg"
+  }
+];
 
-/* Create 3 or more product objects using object literal notation 
-   Each product should include five properties
-   - name: name of product (string)
-   - price: price of product (number)
-   - quantity: quantity in cart should start at zero (number)
-   - productId: unique id for the product (number)
-   - image: picture of product (url string)
-*/
-let product1 = {
-  name: "Cherry",
-  price: 20,
-  quantity: 0,
-  productId: 1,
-  image: "./images/cherry.jpg"
-};
-
-let product2 = {
-  name: "Orange",
-  price: 10,
-  quantity: 0,
-  productId: 2,
-  image: "./images/orange.jpg"
-};
-
-let product3 = {
-  name: "Strawberry",
-  price: 15,
-  quantity: 0,
-  productId: 3,
-  image: "./images/strawberry.jpg"
-};
-
-products.push(product1);
-products.push(product2);
-products.push(product3);
-
-
-/* Declare an empty array named cart to hold the items in the cart */
 let cart = [];
 
 /* Create a function named addProductToCart that takes in the product productId as an argument
@@ -134,25 +118,17 @@ function pay (amount) {
 
 
 function currency(selectedCurrency) {
-  console.log('selectedCurrency', selectedCurrency);
-
   const conversionRates = {
-    usd: 1,
-    real: 5.5,
-    euro: 0.85,
-    yen: 110,
+    USD: 1,
+    EUR: 0.85,
+    YEN: 110,
   };
     
- 
-  
   const priceElements = document.querySelectorAll(".price");
   const totalElement = document.querySelector(".cart-total");
-  console.log("priceElements:", priceElements);
   
   priceElements.forEach((element) => {
     const price = parseFloat(element.textContent);
-    console.log("element:", element);
-    console.log("price:", price);
     let convertedPrice;
 
     if (selectedCurrency === 'USD') {
@@ -162,7 +138,6 @@ function currency(selectedCurrency) {
 
     }
 
-    console.log("convertedPrice:", convertedPrice);
     element.textContent = convertedPrice.toFixed(2);
   });
 
