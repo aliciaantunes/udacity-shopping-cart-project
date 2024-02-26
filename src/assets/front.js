@@ -30,7 +30,7 @@ function drawCart() {
         cartItems += `
             <div data-productId='${element.productId}'>
                 <h3>${element.name}</h3>
-                <p>price: ${currencySymbol}${element.price}</p>
+                <p class="price">price: ${currencySymbol}${element.price}</p>
                 <p>quantity: ${element.quantity}</p>
                 <p>total: ${currencySymbol}${itemTotal}</p>
                 <button class="qup">+</button>
@@ -145,55 +145,35 @@ document.querySelector('.pay').addEventListener('click', (e) => {
     paymentSummary.append(div);
 });
 
-/* Standout suggestions */
-/* Begin remove all items from cart */
-// function dropCart(){
-//     let shoppingCart = document.querySelector('.empty-btn');
-//     let div = document.createElement("button");
-//     div.classList.add("empty");
-//     div.innerHTML =`Empty Cart`;
-//     shoppingCart.append(div);
-// }
-// dropCart();
-
-// document.querySelector('.empty-btn').addEventListener('click', (e) => {
-//     if (e.target.classList.contains('empty')){
-//         emptyCart();
-//         drawCart();
-//         drawCheckout();
-//     }
-// })
-/* End all items from cart */
-
 /* Begin currency converter */
-// function currencyBuilder(){
-//     let currencyPicker = document.querySelector('.currency-selector');
-//     let select = document.createElement("select");
-//     select.classList.add("currency-select");
-//     select.innerHTML = `<option value="USD">USD</option>
-//                         <option value="EUR">EUR</option>
-//                         <option value="YEN">YEN</option>`;
-//     currencyPicker.append(select);
-// }
-// currencyBuilder();
+function currencyBuilder(){
+    let currencyPicker = document.querySelector('.currency-selector');
+    let select = document.createElement("select");
+    select.classList.add("currency-select");
+    select.innerHTML = `<option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="YEN">YEN</option>`;
+    currencyPicker.append(select);
+}
+currencyBuilder();
 
-// document.querySelector('.currency-select').addEventListener('change', function handleChange(event) {
-//     switch(event.target.value){
-//         case 'EUR':
-//             currencySymbol = '€';
-//             break;
-//         case 'YEN':
-//             currencySymbol = '¥';
-//             break;
-//         default:
-//             currencySymbol = '$';
-//             break;
-//      }
+document.querySelector('.currency-select').addEventListener('change', function handleChange(event) {
+    switch(event.target.value){
+        case 'EUR':
+            currencySymbol = '€';
+            break;
+        case 'YEN':
+            currencySymbol = '¥';
+            break;
+        default:
+            currencySymbol = '$';
+            break;
+     }
 
-//     currency(event.target.value);
-//     drawProducts();
-//     drawCart();
-//     drawCheckout();
-// });
+    currency(event.target.value);
+    drawProducts();
+    drawCart();
+    drawCheckout();
+});
 /* End currency converter */
 /* End standout suggestions */

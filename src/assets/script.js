@@ -133,9 +133,8 @@ function pay (amount) {
 }
 
 
-
-currencySelector.addEventListener('change', function () {
-  const selectedCurrency = currencySelector.value;
+function currency(selectedCurrency) {
+  console.log('selectedCurrency', selectedCurrency);
 
   const conversionRates = {
     usd: 1,
@@ -143,27 +142,35 @@ currencySelector.addEventListener('change', function () {
     euro: 0.85,
     yen: 110,
   };
-
+    
+ 
+  
   const priceElements = document.querySelectorAll(".price");
   const totalElement = document.querySelector(".cart-total");
-
+  console.log("priceElements:", priceElements);
+  
   priceElements.forEach((element) => {
     const price = parseFloat(element.textContent);
+    console.log("element:", element);
+    console.log("price:", price);
     let convertedPrice;
 
-    if (selectedCurrency === 'usd') {
+    if (selectedCurrency === 'USD') {
       convertedPrice = price;
     } else {
       convertedPrice = price * conversionRates[selectedCurrency];
+
     }
 
+    console.log("convertedPrice:", convertedPrice);
     element.textContent = convertedPrice.toFixed(2);
   });
 
-  const total = parseFloat(totalElement.textContent);
-  let convertedTotal;
 
-  if (selectedCurrency === 'usd') {
+  const total = parseFloat(totalElement.textContent);
+  let convertedTotal; 
+
+  if (selectedCurrency === 'USD') {
     convertedTotal = total;
   } else {
     convertedTotal = total * conversionRates[selectedCurrency];
@@ -176,7 +183,7 @@ currencySelector.addEventListener('change', function () {
   products = products.map((product) => {
     let convertedPrice;
 
-    if (selectedCurrency === 'usd') {
+    if (selectedCurrency === 'USD') {
       convertedPrice = product.price;
     } else {
       convertedPrice = product.price * conversionRates[selectedCurrency];
@@ -186,11 +193,11 @@ currencySelector.addEventListener('change', function () {
   });
 
   cart.forEach((item) => {
-    if (selectedCurrency !== 'usd') {
+    if (selectedCurrency !== 'USD') {
       item.price = item.price * conversionRates[selectedCurrency];
     }
   });
-});
+}
 
 
 
