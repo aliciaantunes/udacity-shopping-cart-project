@@ -115,6 +115,8 @@ function pay(amount) {
     // Remover os itens do carrinho
     cart = [];  
     emptyCart();
+    totalPaid += amount; // Atualizar o valor de totalPaid
+    document.getElementById("totalPaidValue").textContent = "$" + totalPaid; 
     return remainingBalance;
   } else {
     return -remainingBalance;
@@ -132,6 +134,7 @@ function currency(selectedCurrency) {
     
   const priceElements = document.querySelectorAll(".price");
   const totalElement = document.querySelector(".cart-total");
+  
   
   priceElements.forEach((element) => {
     const price = parseFloat(element.textContent);
