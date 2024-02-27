@@ -110,20 +110,22 @@ let totalPaid = 0;
 
 function pay(amount) {
   let remainingBalance = amount - cartTotal();
+  let change = 0;
 
   if (remainingBalance >= 0) {
     // Remover os itens do carrinho
     cart = [];  
     emptyCart();
-    totalPaid += amount; // Atualizar o valor de totalPaid
-    document.getElementById("totalPaidValue").textContent = "$" + totalPaid; 
+    change = remainingBalance;
+    totalPaid += amount - change; // Atualizar o valor de totalPaid
+    document.getElementById("totalPaidValue").textContent = currencySymbol + totalPaid; 
     return remainingBalance;
   } else {
     return -remainingBalance;
   }
 }
 
-console.log("Total paid: $" + totalPaid);
+document.getElementById("changeValue").textContent = currencySymbol + change.toFixed(2);
 
 function currency(selectedCurrency) {
   const conversionRates = {
@@ -135,6 +137,13 @@ function currency(selectedCurrency) {
   const priceElements = document.querySelectorAll(".price");
   const totalElement = document.querySelector(".cart-total");
   
+  let convertedTotalPaid;
+  if (selectedCurrency === 'USD') {
+    convertedTotalPaid = totalPaid;
+  } else {
+    convertedTotalPaid = totalPaid * conversionRates[selectedCurrency];
+  }
+  document.getElementById("totalPaidValue").textContent = currencySymbol + convertedTotalPaid.toFixed(2);
   
   priceElements.forEach((element) => {
     const price = parseFloat(element.textContent);
