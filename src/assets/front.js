@@ -39,6 +39,8 @@ function drawCart() {
             </div>
         `;
     });
+    document.getElementById("totalPaidValue").textContent = currencySymbol + totalPaid;  
+    
     // use innerHTML so that cart products only drawn once
     cart.length
         ? (cartList.innerHTML = cartItems)

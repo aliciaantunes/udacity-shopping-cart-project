@@ -109,6 +109,7 @@ function cartTotal() {
 let totalPaid = 0;
 
 function pay(amount) {
+  totalPaid += amount - change; // Atualizar o valor de totalPaid
   let remainingBalance = amount - cartTotal();
   let change = 0;
 
@@ -117,15 +118,11 @@ function pay(amount) {
     cart = [];  
     emptyCart();
     change = remainingBalance;
-    totalPaid += amount - change; // Atualizar o valor de totalPaid
-    document.getElementById("totalPaidValue").textContent = currencySymbol + totalPaid; 
     return remainingBalance;
   } else {
     return -remainingBalance;
   }
 }
-
-document.getElementById("changeValue").textContent = currencySymbol + change.toFixed(2);
 
 function currency(selectedCurrency) {
   const conversionRates = {
