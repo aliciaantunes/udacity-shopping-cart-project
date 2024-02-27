@@ -106,16 +106,22 @@ function cartTotal() {
   - pay will return a negative number if there is a remaining balance
   - pay will return a positive number if money should be returned to customer
 */
-function pay (amount) {
+let totalPaid = 0;
+
+function pay(amount) {
   let remainingBalance = amount - cartTotal();
 
   if (remainingBalance >= 0) {
+    // Remover os itens do carrinho
+    cart = [];  
+    emptyCart();
     return remainingBalance;
   } else {
     return -remainingBalance;
   }
 }
 
+console.log("Total paid: $" + totalPaid);
 
 function currency(selectedCurrency) {
   const conversionRates = {
