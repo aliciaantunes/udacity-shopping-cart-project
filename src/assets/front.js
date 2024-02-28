@@ -38,8 +38,7 @@ function drawCart() {
                 <button class="remove">remove</button>
             </div>
         `;
-    });
-    document.getElementById("totalPaidValue").textContent = currencySymbol + totalPaid;  
+    });  
     
     // use innerHTML so that cart products only drawn once
     cart.length
@@ -133,18 +132,22 @@ document.querySelector('.pay').addEventListener('click', (e) => {
             <p>Cash Returned: ${currencySymbol}${cashReturn}</p>
             <p>Thank you!</p>
         `;
+
+        totalPaid = 0; // reset totalPaid for next transaction
     } else {
         // reset cash field for next entry
         document.querySelector('.received').value = '';
         div.innerHTML = `
             <p>Cash Received: ${currencySymbol}${amount}</p>
-            <p>Remaining Balance: ${cashReturn}$</p>
+            <p>Total Paid: ${currencySymbol}${totalPaid}</p>
+            <p>Remaining Balance: ${currencySymbol}${cashReturn}</p>
             <p>Please pay additional amount.</p>
             <hr/>
         `;
     }
 
     paymentSummary.append(div);
+    drawCart(); // redraw cart to clear cart items
 });
 
 /* Begin currency converter */

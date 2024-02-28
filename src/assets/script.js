@@ -97,7 +97,11 @@ function removeProductFromCart (productId) {
 
 /* Create a function called emptyCart that empties the products from the cart */
 function emptyCart() {
-  cart = []; 
+  for (let item of cart) {
+    item.quantity = 0;
+  }
+
+  cart = [];
 }
 
 /* Create a function named cartTotal that has no parameters
@@ -128,21 +132,20 @@ let totalPaid = 0;
  * @returns {number} - The remaining balance or the absolute value of the remaining balance.
  */
 function pay(amount) {
-  let remainingBalance = amount - cartTotal();
-  let change = 0;
+  let remainingBalance = (amount + totalPaid) - cartTotal();
 
   if (remainingBalance >= 0) {
-    // Remover os itens do carrinho
-    cart = [];  
+    // update total paid with minus the change
+    totalPaid = 0;
+    // remove products from cart
     emptyCart();
-    change = remainingBalance;
-    totalPaid += amount - change; // Atualizar o valor de totalPaid
-    return remainingBalance;
   } else {
-    return -remainingBalance;
+    // update total paid with the amount paid
+    totalPaid += amount;
   }
-}
 
+  return remainingBalance;
+}
 
 /**
  * Converts the prices and total amount in the shopping cart to the selected currency.
@@ -166,7 +169,6 @@ function currency(selectedCurrency) {
   } else {
     convertedTotalPaid = totalPaid * conversionRates[selectedCurrency];
   }
-  document.getElementById("totalPaidValue").textContent = currencySymbol + convertedTotalPaid.toFixed(2);
   
   // Convert the prices of the products in the shopping cart
   priceElements.forEach((element) => {
